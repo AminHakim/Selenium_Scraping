@@ -14,8 +14,8 @@ time.sleep(2)
 click_sign_in = driver.find_element("xpath", '//*[@class="main__sign-in-link"]').click()
 
 # fill linkedin username and password
-username = "pringiolos@gmail.com"
-password = "Akk1Q@gtBHPV"
+username = "put email here"
+password = "put password here"
 
 time.sleep(5)
 
@@ -30,55 +30,62 @@ click_submit = driver.find_element("xpath", '//*[@aria-label="Sign in"]').click(
 # click_porfolio = driver.find_element("xpath", '//a[@class="app-aware-link"]').click()
 
 # scrape portfolio page
-scrape = driver.find_elements("xpath", '//div[@class="entity-result__content entity-result__divider pt3 pb3 t-12 t-black--light"]')
-
 company_name = []
 follower = []
 industry = []
 description = []
 
-for a in scrape:
-    array1 = a.text.split('\n')
-    #print(array1)
-    company_name.append(array1[0])
-    follower.append(array1[1])
-    industry.append(array1[2])
-    description.append(array1[3])
-    #print(a.text)
+X = 1
 
-#print(company_name)
-#print(follower)
-#print(industry)
-#print(description)
-print('COMPANY NAME')
-for a in company_name:
-    print(a)
-print()
-print('FOLLOWER')
-for a in follower:
-    print(a)
-print()
-print('INDUSTRY')
-for a in industry:
-    print(a)
-print()
-print('DESCRIPTION')
-for a in description:
-    print(a)
+while X <= 5:
+    X += 1
+
+    scrape = driver.find_elements("xpath", '//div[@class="entity-result__content entity-result__divider pt3 pb3 t-12 t-black--light"]')
+
+    for a in scrape:
+        array1 = a.text.split('\n')
+        #print(array1)
+        company_name.append(array1[0])
+        follower.append(array1[1])
+        industry.append(array1[2])
+        description.append(array1[3])
+        #print(a.text)
+
+# print(company_name)
+# print(follower)
+# print(industry)
+# print(description)
+    print('COMPANY NAME')
+    for a in company_name:
+        print(a)
+    print()
+    print('FOLLOWER')
+    for a in follower:
+        print(a)
+    print()
+    print('INDUSTRY')
+    for a in industry:
+        print(a)
+    print()
+    print('DESCRIPTION')
+    for a in description:
+        print(a)
 
 # scroll to the bottom of the page
-driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
 # wait before click next
-time.sleep(5)
+    time.sleep(5)
 
 # click next button
-next_button = driver.find_element("xpath", '//button[@aria-label="Next"]').click()
+    next_button = driver.find_element("xpath", '//button[@aria-label="Next"]').click()
 
-time.sleep(2)
+# sleep to wait loading page after next page
+    time.sleep(2)
 
-#df = pd.DataFrame({'company_name': company_name, 'follower': follower, 'industry': industry, 'description': description,})
-#df.to_excel('test3.xlsx')
-#print(df)
+# final export
+df = pd.DataFrame({'company_name': company_name, 'follower': follower, 'industry': industry, 'description': description,})
+df.to_excel('test4.xlsx')
+print(df)
 
 
