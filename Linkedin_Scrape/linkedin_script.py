@@ -28,23 +28,12 @@ click_submit = driver.find_element("xpath", '//*[@aria-label="Sign in"]').click(
 # click_porfolio = driver.find_element("xpath", '//a[@class="app-aware-link"]').click()
 
 # scrape portfolio page
-scrape = driver.find_elements("xpath", '//a[@class="app-aware-link"]')
+scrape = driver.find_elements("xpath", '//div[@class="entity-result__content entity-result__divider pt3 pb3 t-12 t-black--light"]')
 
 company_name = []
 
-x = 0
-company = 1
-for a in scrape
-  x+=1
-  if x == 5
-    x = 1
-  end
-  result = a.text
-  if x == 1
-    result = company + " " + a.text
-    company +=1
-  end
-  print (result)
+for a in scrape:
+    print(a.text)
 
 
 
