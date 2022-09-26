@@ -14,8 +14,8 @@ driver.get(website)
 click_sign_in = driver.find_element("xpath", '//*[@class="main__sign-in-link"]').click()
 
 # fill linkedin username and password
-username = "tsubaki.azura@gmail.com"
-password = "F@w6UZ*F4kfY"
+username = "pringiolos@gmail.com"
+password = "Akk1Q@gtBHPV"
 
 # automated fill in username and password
 driver.find_element("xpath", '//*[@name="session_key"]').send_keys(username)
@@ -34,7 +34,6 @@ company_name = []
 
 for a in scrape:
     print(a.text)
-
 
 
 
