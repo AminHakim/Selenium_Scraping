@@ -1,5 +1,4 @@
 import time
-
 from selenium import webdriver
 import pandas as pd
 
@@ -78,44 +77,8 @@ next_button = driver.find_element("xpath", '//button[@aria-label="Next"]').click
 
 time.sleep(2)
 
-scrape = driver.find_elements("xpath", '//div[@class="entity-result__content entity-result__divider pt3 pb3 t-12 t-black--light"]')
-
-company_name = []
-follower = []
-industry = []
-description = []
-
-for a in scrape:
-    array1 = a.text.split('\n')
-    #print(array1)
-    company_name.append(array1[0])
-    follower.append(array1[1])
-    industry.append(array1[2])
-    description.append(array1[3])
-    #print(a.text)
-
-#print(company_name)
-#print(follower)
-#print(industry)
-#print(description)
-print('COMPANY NAME')
-for a in company_name:
-    print(a)
-print()
-print('FOLLOWER')
-for a in follower:
-    print(a)
-print()
-print('INDUSTRY')
-for a in industry:
-    print(a)
-print()
-print('DESCRIPTION')
-for a in description:
-    print(a)
-
-df = pd.DataFrame({'company_name': company_name, 'follower': follower, 'industry': industry, 'description': description,})
-df.to_excel('test3.xlsx')
-print(df)
+#df = pd.DataFrame({'company_name': company_name, 'follower': follower, 'industry': industry, 'description': description,})
+#df.to_excel('test3.xlsx')
+#print(df)
 
 
