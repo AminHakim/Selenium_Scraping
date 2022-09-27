@@ -1,5 +1,7 @@
 import time
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
 import pandas as pd
 
 # open target website with webdriver
@@ -14,8 +16,8 @@ time.sleep(2)
 click_sign_in = driver.find_element("xpath", '//*[@class="main__sign-in-link"]').click()
 
 # fill linkedin username and password
-username = "put email here"
-password = "put password here"
+username = "enter email here"
+password = "enter password here"
 
 time.sleep(5)
 
@@ -34,10 +36,11 @@ company_name = []
 follower = []
 industry = []
 description = []
+linkedin_link = []
 
 X = 1
 
-while X <= 5:
+while X <= 2:
     X += 1
 
     scrape = driver.find_elements("xpath", '//div[@class="entity-result__content entity-result__divider pt3 pb3 t-12 t-black--light"]')
@@ -50,6 +53,19 @@ while X <= 5:
         industry.append(array1[2])
         description.append(array1[3])
         #print(a.text)
+
+# scrape linkedin link
+    y = 0
+    while y < 10:
+        y += 1
+
+        link = driver.find_elements(by=By.XPATH,
+                                    value="/html/body/div[6]/div[3]/div[2]/div/div[1]/main/div/div/div[1]/ul/li[" + str(
+                                        y) + "]/div/div/div[2]/div[1]/div[1]/div/span/span/a")
+        for a in link:
+            get_link = a.get_attribute("href")
+            linkedin_link.append(get_link)
+            # print(get_link)
 
 # print(company_name)
 # print(follower)
@@ -70,6 +86,9 @@ while X <= 5:
     print('DESCRIPTION')
     for a in description:
         print(a)
+    print('LINKEDIN LINK')
+    for a in linkedin_link:
+        print(a)
 
 # scroll to the bottom of the page
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
@@ -84,8 +103,9 @@ while X <= 5:
     time.sleep(2)
 
 # final export
-df = pd.DataFrame({'company_name': company_name, 'follower': follower, 'industry': industry, 'description': description,})
-df.to_excel('test4.xlsx')
+df = pd.DataFrame({'company_name': company_name, 'follower': follower, 'industry': industry, 'description': description,
+                   'linkedin_link': linkedin_link})
+df.to_excel('test6.xlsx')
 print(df)
 
 
