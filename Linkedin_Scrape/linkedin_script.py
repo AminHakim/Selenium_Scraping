@@ -10,15 +10,17 @@ path = '\Python310\Chromedriver'
 driver = webdriver.Chrome(executable_path=r'C:\Python310\Chromedriver\chromedriver.exe')
 driver.get(website)
 
+# wait before click sign in
 time.sleep(2)
 
 # click sign in button
 click_sign_in = driver.find_element("xpath", '//*[@class="main__sign-in-link"]').click()
 
 # fill linkedin username and password
-username = "enter email here"
-password = "enter password here"
+username = ""
+password = ""
 
+# wait before click log in
 time.sleep(5)
 
 # automated fill in username and password
@@ -40,7 +42,7 @@ linkedin_link = []
 
 X = 1
 
-while X <= 2:
+while X <= 100:
     X += 1
 
     scrape = driver.find_elements("xpath", '//div[@class="entity-result__content entity-result__divider pt3 pb3 t-12 t-black--light"]')
@@ -90,6 +92,9 @@ while X <= 2:
     for a in linkedin_link:
         print(a)
 
+# wait before scroll bottom page
+    time.sleep(3)
+
 # scroll to the bottom of the page
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
@@ -100,12 +105,12 @@ while X <= 2:
     next_button = driver.find_element("xpath", '//button[@aria-label="Next"]').click()
 
 # sleep to wait loading page after next page
-    time.sleep(2)
+    time.sleep(5)
 
 # final export
 df = pd.DataFrame({'company_name': company_name, 'follower': follower, 'industry': industry, 'description': description,
                    'linkedin_link': linkedin_link})
-df.to_excel('test6.xlsx')
+df.to_excel('Linkedin test 1.xlsx')
 print(df)
 
 
